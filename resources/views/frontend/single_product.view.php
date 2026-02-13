@@ -517,6 +517,11 @@
 
         <!-- UPDATED FORM ACTION WITH ANCHOR -->
         <form action="/admin/contact-us/store#inquiry-section" id="query_form" method="POST">
+            <?php if(error('g-recaptcha-response')): ?>
+            <div class="mb-3">
+                    <p class="p-2 bg-danger"><?=  error('g-recaptcha-response') ?> ?></p>
+            </div>
+            <?php endif ;?>
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
                 <?php if(error('name')): ?>
@@ -538,7 +543,7 @@
                 <label for="message" class="form-label">Message</label>
                 <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" name="message"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-compact">Submit</button>
+            <button type="submit" class="btn btn-primary btn-compact g-recaptcha" data-sitekey="<?=  get_env_variable('CLIENT_SITE_KEY')  ?>" data-callback="onInquerySubmit">Submit</button>
         </form>
     </div>
     

@@ -126,9 +126,11 @@ class SessionController
         return back();
       }
 
+      //ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270 
     $user = User::find($user['email'], 'email');
+    $password = hash_make(trim($req->request('password')));
 
-    $user->update(['password'=> hash_make(trim($req->request('password')))]);
+    $user->update(['password'=> $password]);
 
      Session::flash('success', "Password has been successfully changed!!");
 

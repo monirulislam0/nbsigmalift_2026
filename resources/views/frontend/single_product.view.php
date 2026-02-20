@@ -322,7 +322,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <style>
-                .p-5 img{
+                .p-4 img{
                     width:100% !important;
                 }
             </style>
@@ -331,7 +331,7 @@
                     Product Details
                 </h2>
                 <hr class="hr">
-                <div class="p-4">
+                <div class="p-4" id="description_wrapper" style="margin-bottom: 50px;">
                  <?= $product['long_description'] ?>
                 </div>
                 <?php 
@@ -537,6 +537,13 @@
                 <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email">
             </div>
             <div class="mb-3">
+            <?php if(error('whatsapp')): ?>
+                    <p class="text-danger"> <?= error('whatsapp') ?></p>
+                <?php endif; ?>
+                <label for="whatsapp" class="form-label">WhatsApp Number</label>
+                <input type="text" class="form-control" id="whatsapp" placeholder="Enter your WhatsApp number" name="whatsapp">
+            </div>
+            <div class="mb-3">
             <?php if(error('message')): ?>
                     <p class="text-danger"> <?= error('message') ?></p>
                 <?php endif; ?>
@@ -598,6 +605,20 @@
         document.getElementById('lightboxImage').addEventListener('click', function(e) {
             e.stopPropagation();
         });
+    </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            const width = window.innerWidth ;
+
+            if(width <= 414) {
+            const parentDiv = document.getElementById('description_wrapper');
+            const images = parentDiv.querySelectorAll('img');
+              images.forEach(function(img) {
+                img.style.width = '100%';
+                img.style.height = 'auto';
+            });
+            }
+        })
     </script>
 <?php 
 

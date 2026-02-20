@@ -147,11 +147,11 @@ template_include("/frontend/partials/banner", compact('page'));
             </div>
 
             <form action="/admin/contact-us/store" method="POST" id="contact_form">
-                <?php if(error('g-recaptcha-response')): ?>
+                <?php if (error('g-recaptcha-response')): ?>
                     <div class="mb-3">
-                    <p class="p-2 bg-danger" ><?=  error('g-recaptcha-response') ?> ?></p>
-            </div>
-            <?php endif ;?>
+                        <p class="p-2 bg-danger"><?= error('g-recaptcha-response') ?> ?></p>
+                    </div>
+                <?php endif; ?>
 
                 <div class="mb-3">
 
@@ -182,6 +182,14 @@ template_include("/frontend/partials/banner", compact('page'));
                 </div>
 
                 <div class="mb-3">
+                    <?php if (error('whatsapp')): ?>
+                        <p class="text-danger"> <?= error('whatsapp') ?></p>
+                    <?php endif; ?>
+                    <label for="whatsapp" class="form-label">WhatsApp Number</label>
+                    <input type="text" class="form-control" id="whatsapp" placeholder="Enter your WhatsApp number" name="whatsapp">
+                </div>
+
+                <div class="mb-3">
 
                     <?php if (error('message')): ?>
 
@@ -195,7 +203,7 @@ template_include("/frontend/partials/banner", compact('page'));
 
                 </div>
 
-                <button type="submit" class="btn btn-primary g-recaptcha" data-sitekey="<?=  get_env_variable('CLIENT_SITE_KEY')  ?>" data-callback="onSubmit">Submit</button>
+                <button type="submit" class="btn btn-primary g-recaptcha" data-sitekey="<?= get_env_variable('CLIENT_SITE_KEY')  ?>" data-callback="onSubmit">Submit</button>
 
             </form>
 

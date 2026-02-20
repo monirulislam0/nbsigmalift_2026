@@ -52,6 +52,8 @@ class MessagesController
 
             'g-recaptcha-response' => 'required',
 
+            'whatsapp' => 'required|min:10',
+
         ], [
 
             'email.required'    => 'Email is required !!',
@@ -60,7 +62,10 @@ class MessagesController
 
             'message.required'    => 'Message Body is required !!',
 
-            'message.required' => 'Cannot send query without human verification',
+            'g-recaptcha-response.required' => 'Cannot send query without human verification',
+
+            'whatsapp.required' => 'WhatsApp number is required !!',
+            'whatsapp.min' => 'WhatsApp number must be at least 10 characters !!',
 
         ]);
 
@@ -98,12 +103,16 @@ class MessagesController
 
         if ($req->request('message')) $attributes['message'] = $req->request('message');
 
-        //if we chaining insert it will return the state if upload or not;
+        if ($req->request('whatsapp')) $attributes['whatsapp'] = $req->request('whatsapp');
 
+        $attributes['created_at'] = date("Y-m-d H:i:s");
+
+        //if we chaining insert it will return the state if upload or not;
+   
         Messages::create($attributes);
 
 
-
+ 
 
 
         $mail_to_send_to = "sales@hayashimulift-jp.com";
